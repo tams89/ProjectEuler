@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace ProjectEuler
 {
+    /// <summary>
+    /// Multiples of 3 and 5
+    /// </summary>
     public class Euler1
     {
         public static void MultipleSum()

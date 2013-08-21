@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace ProjectEuler
 {
+    /// <summary>
+    /// Largest prime factor
+    /// </summary>
     public class Euler3
     {
         public static void FindGreatestPrimeFactor()

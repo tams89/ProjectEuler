@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace ProjectEuler
 {
+    /// <summary>
+    /// Even Fibonacci numbers
+    /// </summary>
     public class Euler2
     {
         public static void Fibonacci()
