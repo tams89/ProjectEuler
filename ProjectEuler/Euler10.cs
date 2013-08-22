@@ -2,8 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.Common;
 using System.Linq;
-using System.Runtime.Remoting.Messaging;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,15 +18,9 @@ namespace ProjectEuler
         // Find the sum of all the primes below two million.
         public static void SummationOfPrimesBelowTwoMillion()
         {
-            //int sumOfPrimes = 0;
-            //var primes = Primes((int)2e6);
-            //foreach (var prime in primes)
-            //{
-            //    sumOfPrimes += prime;
-            //}
-
             int sumOfPrimes = 0;
-            foreach (var prime in PrimeGenerator())
+            var primes = Sieve2((int)2e6);
+            foreach (var prime in primes)
             {
                 sumOfPrimes += prime;
             }
@@ -34,53 +29,36 @@ namespace ProjectEuler
             Console.ReadLine();
         }
 
-        private static IEnumerable<int> PrimeGenerator()
-        {
-            var oneToTwoMillion = Enumerable.Range(1, ((int)2e6));
-            var primesOnly = oneToTwoMillion.Where(IsPrime).AsParallel().ToArray();
-            return primesOnly;
-        }
 
-        private static bool IsPrime(int potentialPrime)
+        private static IEnumerable<int> Primes(int maximumPrime)
         {
-            // Exceptions.
-            if (potentialPrime == 1) return false;
-            if (potentialPrime == 2 || potentialPrime == 3 || potentialPrime == 5 || potentialPrime == 7) return true;
+            // HashSet pre-populated with initial values. Also HashSet inherently only allows unique values and all primes are unique.
+            var primes = new HashSet<int> { 2, 3, 5, 7 };
 
-            var listOfRandomNums = new int[100];
-            var random = new Random(potentialPrime);
-            for (var i = 0; i < listOfRandomNums.Length; i++)
+            // Exclusion bit array, all values false by default.
+            var exclude = new BitArray(maximumPrime + 1);
+
+            // For the testing of the trial division 
+            var sqrtOfMax = Math.Ceiling(Math.Sqrt(maximumPrime));
+
+            // Increment in steps of 2 starting from 3 as all even numbers are multiples of 2 and are not primes; so these are 
+            // avoided by incrementing 3 (odd) by an even number 2 which is always odd.
+            for (var i = 3; i <= maximumPrime; i += 2)
             {
-                listOfRandomNums[i] = random.Next(1, potentialPrime);
-            }
-
-            return listOfRandomNums.AsParallel().Select(listOfRandomNum => Math.Pow(listOfRandomNum, (potentialPrime - 1))).Any(a => Math.Abs(a - 1) < 0.001);
-        }
-
-        private static IEnumerable<int> Primes(int maximusPrime)
-        {
-            var vals = new List<int>((int)(maximusPrime / (Math.Log(maximusPrime) - 1.08366)));
-            var maxSquareRoot = Math.Sqrt(maximusPrime);
-            var eliminated = new BitArray(maximusPrime + 1);
-
-            vals.Add(2);
-
-            for (int i = 3; i <= maximusPrime; i += 2)
-            {
-                if (eliminated[i]) continue;
+                // If in exclusion list goto next value. 
+                if (exclude[i]) continue;
                 
-                if (i < maxSquareRoot)
-                {
-                    for (var j = i * i; j <= maximusPrime; j += 2 * i)
-                    {
-                        eliminated[j] = true;
-                    }
-                }
+                if (i <= sqrtOfMax)
+                    // A prime squared is not a prime
+                    // Exclude all multiples of this prime; 2 * primeSquared which are even and so cannot be prime except for 2.
+                    for (var j = i * i; j <= maximumPrime; j += 2 * i)
+                        exclude[j] = true;
 
-                vals.Add(i);
+                // If not excluded and not a multiple of a primeSquared then is a prime.
+                primes.Add(i);
             }
 
-            return vals;
+            return primes;
         }
     }
 }
