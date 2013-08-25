@@ -42,137 +42,188 @@ namespace ProjectEuler
 
         public static long GreatestFourAdjacentNumbers()
         {
-            int greatestProduct = 0;
-            var listOfNums = new List<int>();
-            var rowBoundary = Grid.GetUpperBound(0) - 3;
+            var intList = new List<long>();
+            long greatestValue = 0;
 
-            #region Left - Correct
-            // Loops through each row
-            for (int row = 0; row <= rowBoundary; row++)
+            for (int i = 0; i <= 19; i++)
             {
-                // Loops through each column within a row
-                for (int column = 19; column >= rowBoundary; column--)
+                for (int j = 0; j <= 19; j++)
                 {
-                    // Gets the four values within the row.
-                    for (int rowItem = column; rowItem >= column - 3; rowItem--)
-                    {
-                        var num = Grid[row, rowItem];
-                        listOfNums.Add(num);
-                    }
+                    intList.Add(Left(i, j));
+                    intList.Add(Right(i, j));
+                    intList.Add(Up(i, j));
+                    intList.Add(Down(i, j));
+                    intList.Add(DiagonalDownRight(i, j));
+                    intList.Add(DiagonalDownLeft(i, j));
+                    intList.Add(DiagonalUpRight(i, j));
+                    intList.Add(DiagonalUpLeft(i, j));
 
-                    if (listOfNums.Count == 4)
-                    {
-                        var product = listOfNums.Aggregate(1, (i, i1) => i * i1);
-                        if (product > greatestProduct) greatestProduct = product;
-                        listOfNums.Clear();
-                    }
-                }
-            }
-            #endregion
-
-            #region Right - Correct
-            // Loops through each row
-            for (int row = 0; row <= rowBoundary; row++)
-            {
-                // Loops through each column within a row
-                for (int column = 0; column <= rowBoundary; column++)
-                {
-                    // Gets the four values within the row.
-                    for (int rowItem = column; rowItem <= 3 + column; rowItem++)
-                    {
-                        var num = Grid[row, rowItem];
-                        listOfNums.Add(num);
-                    }
-
-                    if (listOfNums.Count == 4)
-                    {
-                        var product = listOfNums.Aggregate(1, (i, i1) => i * i1);
-                        if (product > greatestProduct) greatestProduct = product;
-                        listOfNums.Clear();
-                    }
-                }
-            }
-            #endregion
-
-            #region Up - Correct
-
-            for (int column = 0; column <= 19; column++)
-            {
-                for (int row = 19; row >= 3; row--)
-                {
-                    for (int i = row; i >= row - 3; i--)
-                    {
-                        var num = Grid[i, column];
-                        listOfNums.Add(num);
-                    }
-
-                    if (listOfNums.Count == 4)
-                    {
-                        var product = listOfNums.Aggregate(1, (i, i1) => i * i1);
-                        if (product > greatestProduct) greatestProduct = product;
-                        listOfNums.Clear();
-                    }
+                    var greatest = intList.OrderByDescending(x => x).FirstOrDefault();
+                    greatestValue = greatest;
                 }
             }
 
-            #endregion
-
-            #region Down - Correct
-            for (int row = 0; row <= 16; row++)
-            {
-                for (int column = 0; column <= 16; column++)
-                {
-                    for (int columnItem = column; columnItem <= 3 + column; columnItem++)
-                    {
-                        var num = Grid[columnItem, row];
-                        listOfNums.Add(num);
-                    }
-
-                    if (listOfNums.Count == 4)
-                    {
-                        var product = listOfNums.Aggregate(1, (i, i1) => i * i1);
-                        if (product > greatestProduct) greatestProduct = product;
-                        listOfNums.Clear();
-                    }
-                }
-            }
-            #endregion
-
-            #region Diagonal
-
-            var listOfArrays = new List<int[]>();
-
-            /* x starts at 0. 
-             * y starts at 0. 
-             * x++ and y++ until y = 3
-             * then add 1 to yStart and y = yStart, +1,+2,+3
-             * once y equals 19 add 1 to xStart and repeat.
-             */
-
-            int x = 0, xStart = 0, yStart = 0;
-
-            while (x <= 16)
-            {
-                for (int y = yStart; y <= 16 + yStart; y++)
-                {
-                    var array = new[] { xStart, y };
-                    listOfArrays.Add(array);
-                }
-
-                x++;
-                yStart++;
-                xStart++;
-            }
-
-            #endregion
-
-            return greatestProduct;
+            return greatestValue;
         }
-    }
 
-    struct Coords
-    {
-        public int x { get; set; }
-        public int y { get; set; }
+        private static long Left(int x, int y)
+        {
+            try
+            {
+                var array = new int[4];
+                array[0] = Grid[x, y];
+                array[1] = Grid[x - 1, y];
+                array[2] = Grid[x - 2, y];
+                array[3] = Grid[x - 3, y];
+
+                return array.Aggregate(1, (i, i1) => i * i1);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return 0;
+        }
+
+        private static long Right(int x, int y)
+        {
+            try
+            {
+                var array = new int[4];
+                array[0] = Grid[x, y];
+                array[1] = Grid[x + 1, y];
+                array[2] = Grid[x + 2, y];
+                array[3] = Grid[x + 3, y];
+
+                return array.Aggregate(1, (i, i1) => i * i1);
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+            return 0;
+        }
+
+        private static long Up(int x, int y)
+        {
+            try
+            {
+                var array = new int[4];
+                array[0] = Grid[x, y];
+                array[1] = Grid[x, y + 1];
+                array[2] = Grid[x, y + 2];
+                array[3] = Grid[x, y + 3];
+
+                return array.Aggregate(1, (i, i1) => i * i1);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return 0;
+        }
+
+        private static long Down(int x, int y)
+        {
+            try
+            {
+                var array = new int[4];
+                array[0] = Grid[x, y];
+                array[1] = Grid[x, y - 1];
+                array[2] = Grid[x, y - 2];
+                array[3] = Grid[x, y - 3];
+
+                return array.Aggregate(1, (i, i1) => i * i1);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return 0;
+        }
+
+        private static long DiagonalDownRight(int x, int y)
+        {
+            try
+            {
+                var array = new int[4];
+                array[0] = Grid[x, y];
+                array[1] = Grid[x - 1, y];
+                array[2] = Grid[x - 2, y];
+                array[3] = Grid[x - 3, y];
+
+                return array.Aggregate(1, (i, i1) => i * i1);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return 0;
+        }
+
+        private static long DiagonalDownLeft(int x, int y)
+        {
+            try
+            {
+                var array = new int[4];
+                array[0] = Grid[x, y];
+                array[1] = Grid[x + 1, y + 1];
+                array[2] = Grid[x + 2, y + 2];
+                array[3] = Grid[x + 3, y + 3];
+
+                return array.Aggregate(1, (i, i1) => i * i1);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return 0;
+        }
+
+        private static long DiagonalUpRight(int x, int y)
+        {
+            try
+            {
+                var array = new int[4];
+                array[0] = Grid[x, y];
+                array[1] = Grid[x - 1, y + 1];
+                array[2] = Grid[x - 2, y + 2];
+                array[3] = Grid[x - 3, y + 3];
+
+                return array.Aggregate(1, (i, i1) => i * i1);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return 0;
+        }
+
+        private static long DiagonalUpLeft(int x, int y)
+        {
+            try
+            {
+                var array = new int[4];
+                array[0] = Grid[x, y];
+                array[1] = Grid[x - 1, y - 1];
+                array[2] = Grid[x - 2, y - 2];
+                array[3] = Grid[x - 3, y - 3];
+
+                return array.Aggregate(1, (i, i1) => i * i1);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return 0;
+        }
     }
 }
