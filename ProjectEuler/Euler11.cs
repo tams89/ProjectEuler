@@ -44,17 +44,19 @@ namespace ProjectEuler
         {
             int greatestProduct = 0;
             var listOfNums = new List<int>();
-            var nums = new List<int>();
-            // e.g. Grid[0,0] Grid[0,1] Grid[0,2] Grid[0,3] is column 0 then rows 0-3.
+            var rowBoundary = Grid.GetUpperBound(0) - 3;
 
-            #region Left
-            for (int rowIndex = 20; rowIndex <= 16; rowIndex--)
+            #region Left - Correct
+            // Loops through each row
+            for (int row = 0; row <= rowBoundary; row++)
             {
-                for (int columnIndex = 20; columnIndex <= 16; columnIndex--)
+                // Loops through each column within a row
+                for (int column = 19; column >= rowBoundary; column--)
                 {
-                    for (int column = columnIndex; column <= 3 + columnIndex; column--)
+                    // Gets the four values within the row.
+                    for (int rowItem = column; rowItem >= column - 3; rowItem--)
                     {
-                        var num = Grid[rowIndex, column];
+                        var num = Grid[row, rowItem];
                         listOfNums.Add(num);
                     }
 
@@ -68,20 +70,23 @@ namespace ProjectEuler
             }
             #endregion
 
-            #region Right
-            for (int rowIndex = 0; rowIndex <= 16; rowIndex++)
+            #region Right - Correct
+            // Loops through each row
+            for (int row = 0; row <= rowBoundary; row++)
             {
-                for (int columnIndex = 0; columnIndex <= 16; columnIndex++)
+                // Loops through each column within a row
+                for (int column = 0; column <= rowBoundary; column++)
                 {
-                    for (int column = columnIndex; column <= 3 + columnIndex; column++)
+                    // Gets the four values within the row.
+                    for (int rowItem = column; rowItem <= 3 + column; rowItem++)
                     {
-                        var num = Grid[rowIndex, column];
+                        var num = Grid[row, rowItem];
                         listOfNums.Add(num);
                     }
 
                     if (listOfNums.Count == 4)
                     {
-                        var product = listOfNums.Aggregate(1, (i, i1) => i*i1);
+                        var product = listOfNums.Aggregate(1, (i, i1) => i * i1);
                         if (product > greatestProduct) greatestProduct = product;
                         listOfNums.Clear();
                     }
@@ -89,15 +94,15 @@ namespace ProjectEuler
             }
             #endregion
 
-            #region Down
+            #region Up - Correct
 
-            for (int rowIndex = 0; rowIndex <= 16; rowIndex++)
+            for (int column = 0; column <= 19; column++)
             {
-                for (int columnIndex = 0; columnIndex <= 16; columnIndex++)
+                for (int row = 19; row >= 3; row--)
                 {
-                    for (int column = columnIndex; column <= 3 + columnIndex; column++)
+                    for (int i = row; i >= row - 3; i--)
                     {
-                        var num = Grid[column, rowIndex];
+                        var num = Grid[i, column];
                         listOfNums.Add(num);
                     }
 
@@ -112,15 +117,14 @@ namespace ProjectEuler
 
             #endregion
 
-            #region Up
-
-            for (int rowIndex = 20; rowIndex <= 16; rowIndex--)
+            #region Down - Correct
+            for (int row = 0; row <= 16; row++)
             {
-                for (int columnIndex = 20; columnIndex <= 16; columnIndex--)
+                for (int column = 0; column <= 16; column++)
                 {
-                    for (int column = columnIndex; column <= 3 + columnIndex; column--)
+                    for (int columnItem = column; columnItem <= 3 + column; columnItem++)
                     {
-                        var num = Grid[column, rowIndex];
+                        var num = Grid[columnItem, row];
                         listOfNums.Add(num);
                     }
 
@@ -132,20 +136,17 @@ namespace ProjectEuler
                     }
                 }
             }
-
             #endregion
 
             #region Diagonal
-
             // Start position
             for (int i = 0; i <= 16; i++)
             {
                 for (int j = 0; j <= 3; j++)
                 {
-                    
+
                 }
             }
-
             #endregion
 
             return greatestProduct;
