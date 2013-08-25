@@ -44,11 +44,31 @@ namespace ProjectEuler
         {
             int greatestProduct = 0;
             var listOfNums = new List<int>();
-
-            // Iterate through columns first
+            var nums = new List<int>();
             // e.g. Grid[0,0] Grid[0,1] Grid[0,2] Grid[0,3] is column 0 then rows 0-3.
 
-            // Breaks each row into chunk of 4 then proceeds to next row.
+            #region Left
+            for (int rowIndex = 20; rowIndex <= 16; rowIndex--)
+            {
+                for (int columnIndex = 20; columnIndex <= 16; columnIndex--)
+                {
+                    for (int column = columnIndex; column <= 3 + columnIndex; column--)
+                    {
+                        var num = Grid[rowIndex, column];
+                        listOfNums.Add(num);
+                    }
+
+                    if (listOfNums.Count == 4)
+                    {
+                        var product = listOfNums.Aggregate(1, (i, i1) => i * i1);
+                        if (product > greatestProduct) greatestProduct = product;
+                        listOfNums.Clear();
+                    }
+                }
+            }
+            #endregion
+
+            #region Right
             for (int rowIndex = 0; rowIndex <= 16; rowIndex++)
             {
                 for (int columnIndex = 0; columnIndex <= 16; columnIndex++)
@@ -58,15 +78,75 @@ namespace ProjectEuler
                         var num = Grid[rowIndex, column];
                         listOfNums.Add(num);
                     }
-                    
+
                     if (listOfNums.Count == 4)
                     {
-                        var product = listOfNums.Aggregate(1, (i, i1) => i1);
+                        var product = listOfNums.Aggregate(1, (i, i1) => i*i1);
                         if (product > greatestProduct) greatestProduct = product;
                         listOfNums.Clear();
                     }
                 }
             }
+            #endregion
+
+            #region Down
+
+            for (int rowIndex = 0; rowIndex <= 16; rowIndex++)
+            {
+                for (int columnIndex = 0; columnIndex <= 16; columnIndex++)
+                {
+                    for (int column = columnIndex; column <= 3 + columnIndex; column++)
+                    {
+                        var num = Grid[column, rowIndex];
+                        listOfNums.Add(num);
+                    }
+
+                    if (listOfNums.Count == 4)
+                    {
+                        var product = listOfNums.Aggregate(1, (i, i1) => i * i1);
+                        if (product > greatestProduct) greatestProduct = product;
+                        listOfNums.Clear();
+                    }
+                }
+            }
+
+            #endregion
+
+            #region Up
+
+            for (int rowIndex = 20; rowIndex <= 16; rowIndex--)
+            {
+                for (int columnIndex = 20; columnIndex <= 16; columnIndex--)
+                {
+                    for (int column = columnIndex; column <= 3 + columnIndex; column--)
+                    {
+                        var num = Grid[column, rowIndex];
+                        listOfNums.Add(num);
+                    }
+
+                    if (listOfNums.Count == 4)
+                    {
+                        var product = listOfNums.Aggregate(1, (i, i1) => i * i1);
+                        if (product > greatestProduct) greatestProduct = product;
+                        listOfNums.Clear();
+                    }
+                }
+            }
+
+            #endregion
+
+            #region Diagonal
+
+            // Start position
+            for (int i = 0; i <= 16; i++)
+            {
+                for (int j = 0; j <= 3; j++)
+                {
+                    
+                }
+            }
+
+            #endregion
 
             return greatestProduct;
         }
