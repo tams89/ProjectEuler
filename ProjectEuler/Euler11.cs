@@ -139,17 +139,40 @@ namespace ProjectEuler
             #endregion
 
             #region Diagonal
-            // Start position
-            for (int i = 0; i <= 16; i++)
-            {
-                for (int j = 0; j <= 3; j++)
-                {
 
+            var listOfArrays = new List<int[]>();
+
+            /* x starts at 0. 
+             * y starts at 0. 
+             * x++ and y++ until y = 3
+             * then add 1 to yStart and y = yStart, +1,+2,+3
+             * once y equals 19 add 1 to xStart and repeat.
+             */
+
+            int x = 0, xStart = 0, yStart = 0;
+
+            while (x <= 16)
+            {
+                for (int y = yStart; y <= 16 + yStart; y++)
+                {
+                    var array = new[] { xStart, y };
+                    listOfArrays.Add(array);
                 }
+
+                x++;
+                yStart++;
+                xStart++;
             }
+
             #endregion
 
             return greatestProduct;
         }
+    }
+
+    struct Coords
+    {
+        public int x { get; set; }
+        public int y { get; set; }
     }
 }
