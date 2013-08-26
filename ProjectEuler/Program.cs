@@ -11,13 +11,15 @@ namespace ProjectEuler
 
         public static void Main(string[] args)
         {
-            var res = Euler11.GreatestFourAdjacentNumbers();
-            Console.WriteLine(res);
+            sw.Start();
+            var res = Euler12.FirstTriangleNumberWith500Divisors();
+            sw.Stop();
+            TotalTime(sw.ElapsedMilliseconds, res.ToString());
         }
 
-        private static void TotalTime(long timeTaken, string problem, dynamic result)
+        private static void TotalTime(long timeTaken, string result)
         {
-            Console.WriteLine("Time elapsed: {0}. Problem: {1}. Result: {2}", timeTaken, problem, result.ToString());
+            Console.WriteLine("Time elapsed: {0}, result: {1}", timeTaken, result);
         }
     }
 }

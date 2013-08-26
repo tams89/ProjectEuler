@@ -78,9 +78,8 @@ namespace ProjectEuler
 
                 return array.Aggregate(1, (i, i1) => i * i1);
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                Console.WriteLine(e);
             }
 
             return 0;
@@ -99,10 +98,10 @@ namespace ProjectEuler
                 return array.Aggregate(1, (i, i1) => i * i1);
 
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                Console.WriteLine(e);
             }
+
             return 0;
         }
 
@@ -118,9 +117,8 @@ namespace ProjectEuler
 
                 return array.Aggregate(1, (i, i1) => i * i1);
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                Console.WriteLine(e);
             }
 
             return 0;
@@ -138,9 +136,8 @@ namespace ProjectEuler
 
                 return array.Aggregate(1, (i, i1) => i * i1);
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                Console.WriteLine(e);
             }
 
             return 0;
@@ -158,9 +155,8 @@ namespace ProjectEuler
 
                 return array.Aggregate(1, (i, i1) => i * i1);
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                Console.WriteLine(e);
             }
 
             return 0;
@@ -178,9 +174,8 @@ namespace ProjectEuler
 
                 return array.Aggregate(1, (i, i1) => i * i1);
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                Console.WriteLine(e);
             }
 
             return 0;
@@ -198,9 +193,8 @@ namespace ProjectEuler
 
                 return array.Aggregate(1, (i, i1) => i * i1);
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                Console.WriteLine(e);
             }
 
             return 0;
@@ -218,9 +212,8 @@ namespace ProjectEuler
 
                 return array.Aggregate(1, (i, i1) => i * i1);
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                Console.WriteLine(e);
             }
 
             return 0;

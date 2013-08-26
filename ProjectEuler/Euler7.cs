@@ -28,7 +28,7 @@ namespace ProjectEuler
             }
         }
 
-        public static bool IsPrime(int number)
+        public static bool IsPrime(long number)
         {
             var boundary = Math.Floor(Math.Sqrt(number));
 
