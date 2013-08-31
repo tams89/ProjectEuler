@@ -57,6 +57,7 @@ namespace ProjectEuler
             {
                 if (!Euler7.IsPrime(triangleNum))
                 {
+                    if (divisors >= 500) return;
                     if (triangleNum % x == 0)
                         divisors++;
                 }

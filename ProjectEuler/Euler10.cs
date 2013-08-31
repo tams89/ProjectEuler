@@ -17,7 +17,8 @@ namespace ProjectEuler
             return primes.Aggregate((l, l1) => l + l1);
         }
 
-        private static IEnumerable<long> Primes(int maximumPrime)
+        // Calculate all primes up to the maximum prime.
+        public static IEnumerable<long> Primes(int maximumPrime)
         {
             // HashSet pre-populated with initial values. Also HashSet inherently only allows unique values and all primes are unique.
             var primes = new HashSet<long> { 2, 3, 5, 7 };
