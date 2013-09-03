@@ -57,6 +57,7 @@
     <None Include="App.config" />
     <Compile Include="Euler12.fs" />
     <Compile Include="Euler13.fs" />
+    <Compile Include="Euler14.fs" />
     <Compile Include="Program.fs" />
     <Content Include="Euler13.txt" />
   </ItemGroup>
