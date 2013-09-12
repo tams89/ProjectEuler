@@ -21,16 +21,20 @@ How many such routes are there through a 20×20 grid?
 *)
 
 module Euler15 =
-    let factorial num = 
+
+// Pure math approach.
+    let factorial num =
         let mutable factorialResult = 1I
-        for i = 1 to num do 
+        for i = 1 to num do
             factorialResult <- factorialResult * bigint(i)
         factorialResult
-    
-    let binomialCoefficients n k = 
+
+    let binomialCoefficients n k =
             factorial(n) / (factorial(n-k)*factorial(k))
 
-    let numPaths = 
+    let numPaths =
         printfn "Factorial n %A" (factorial 40) // 40 becuase thats the number of steps to get from top left to bottom right.
         printfn "Factorial k %A" (factorial 20) // 20 elements i.e. 20 left or rights must be present.
         binomialCoefficients 40 20
+
+// Dynamic Programming Approach - multiple smaller function

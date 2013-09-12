@@ -59,6 +59,8 @@
     <Compile Include="Euler13.fs" />
     <Compile Include="Euler14.fs" />
     <Compile Include="Euler15.fs" />
+    <Compile Include="Euler16.fs" />
+    <Compile Include="Euler17.fs" />
     <Compile Include="Program.fs" />
     <Content Include="Euler13.txt" />
     <None Include="packages.config" />

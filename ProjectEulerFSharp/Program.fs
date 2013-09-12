@@ -1,6 +1,6 @@
 ﻿namespace Euler
-    module Main = 
+    module Main =
         [<EntryPoint>]
-        let main args = 
-            printfn "ans %A" Euler.Euler15.numPaths
+        let main args =
+            printfn "ans %A" (Euler17.complexNumberToWord 1111)
             0 // return an integer exit code
