@@ -28,7 +28,7 @@ module Euler17 =
             | x when x = 7  -> "seven"
             | x when x = 8  -> "eight"
             | x when x = 9  -> "nine"
-            | _ -> (new Exception("Unit word error")).Message
+            | _ -> ""
 
     let numToTenWord num =
         match num with
@@ -50,36 +50,34 @@ module Euler17 =
             | x when x = 70 -> "seventy"
             | x when x = 80 -> "eighty"
             | x when x = 90 -> "ninety"
-            | _ -> (new Exception("Ten Unit word error")).Message
+            | _ -> ""
 
     let numToLargestUnit num =
         match num with
             | x when x.ToString().Length = 2 -> "ten"
             | x when x.ToString().Length = 3 -> "hundred"
             | x when x.ToString().Length = 4 -> "thousand"
-            | _ -> (new Exception("Largest Unit word error")).Message
+            | _ -> ""
 
     let numAtPosition (num:int) (position:int) (length:int) =
-        let chars = num.ToString().Substring(position-1, length)
+        let chars = num.ToString().Substring(position - 1, length)
         Int32.Parse(chars)
 
-    let test =
-        printfn "%A" (numToUnitWord 0)
-        printfn "%A" (numToTenWord 10)
-        printfn "%A" (numToUnitWord 1)
-
     let hundredNumToWord (num:int) =
-        let startUnit = numToUnitWord (numAtPosition num 1 1) // words "one" to "ten".
-        let largestUnit = numToLargestUnit num // units -> "ten"/ "hundred"/ "thousand"
+        let startUnit = numToUnitWord (numAtPosition num 1 1)
+        let largestUnit = numToLargestUnit num
         let tenUnit = numToTenWord (numAtPosition num 2 2)
-        printfn "%A" startUnit
-        printfn "%A" largestUnit
-        printfn "%A" tenUnit
-        startUnit + " " + largestUnit + " and " + tenUnit
+        let test = ref 0
+        if Int32.TryParse((numAtPosition num 2 2).ToString(), test) && tenUnit <> ""  then
+            startUnit + " " + largestUnit + " and " + tenUnit
+        else
+            startUnit + " " + largestUnit
 
     let thousandNumToWord (num:int) =
         let largestUnit = numToLargestUnit num
-        let restOfThousandNum = hundredNumToWord (Int32.Parse(num.ToString().Substring(1,3)))
+        let mutable restOfThousandNum = ""
+        if Int32.Parse(num.ToString().Substring(1,3)) <> 0 then
+            restOfThousandNum <- hundredNumToWord (Int32.Parse(num.ToString().Substring(1,3)))
         largestUnit + " " + restOfThousandNum
 
     let complexNumberToWord num =
