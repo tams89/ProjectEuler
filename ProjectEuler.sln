@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectEuler", "ProjectEule
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "ProjectEulerFSharp", "ProjectEulerFSharp\ProjectEulerFSharp.fsproj", "{52B8B222-994C-4462-8B25-F290294378AE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTest", "UnitTest\UnitTest.csproj", "{7869859F-C73C-4D5E-A617-096B849BCBED}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{52B8B222-994C-4462-8B25-F290294378AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{52B8B222-994C-4462-8B25-F290294378AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{52B8B222-994C-4462-8B25-F290294378AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7869859F-C73C-4D5E-A617-096B849BCBED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7869859F-C73C-4D5E-A617-096B849BCBED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7869859F-C73C-4D5E-A617-096B849BCBED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7869859F-C73C-4D5E-A617-096B849BCBED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

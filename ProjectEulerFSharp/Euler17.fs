@@ -1,5 +1,4 @@
 ﻿namespace Euler
-
 open System
 
 (*
@@ -16,6 +15,7 @@ open System
 
 module Euler17 =
 
+    /// Matches a single digit number to its word equivalent.
     let numToUnitWord num =
         match num with
             | x when x = 0  -> "zero"
@@ -30,6 +30,7 @@ module Euler17 =
             | x when x = 9  -> "nine"
             | _ -> ""
 
+    /// Matches a number in the tens to its word equivalent.
     let numToTenWord num =
         match num with
             | x when x = 10 -> "ten"
@@ -52,6 +53,7 @@ module Euler17 =
             | x when x = 90 -> "ninety"
             | _ -> ""
 
+    /// The largest unit the number consists of.
     let numToLargestUnit num =
         match num with
             | x when x.ToString().Length = 2 -> "ten"
@@ -59,27 +61,54 @@ module Euler17 =
             | x when x.ToString().Length = 4 -> "thousand"
             | _ -> ""
 
+    /// Gives a number by position and length from the input number.
     let numAtPosition (num:int) (position:int) (length:int) =
         let chars = num.ToString().Substring(position - 1, length)
         Int32.Parse(chars)
 
+    /// Takes a number in the tens and returns its word value.
+    let tenNumToWord (num:int) =
+        let mutable unit = ""
+        if num.ToString().StartsWith("1") then
+            unit <- numToTenWord num
+            unit // i.e. five
+        else
+            unit <- numToUnitWord (numAtPosition num 1 1)
+            let tenUnit = numToTenWord ((numAtPosition num 2 1) * 10)
+            tenUnit + " " + unit // i.e. ninety five
+
+    /// Takes a number in the hundreds and returns its word value.
     let hundredNumToWord (num:int) =
         let startUnit = numToUnitWord (numAtPosition num 1 1)
         let largestUnit = numToLargestUnit num
-        let tenUnit = numToTenWord (numAtPosition num 2 2)
-        let test = ref 0
-        if Int32.TryParse((numAtPosition num 2 2).ToString(), test) && tenUnit <> ""  then
-            startUnit + " " + largestUnit + " and " + tenUnit
+        // Last two numbers are identical then word will be present in ten unit active pattern
+        // so no need disect into ten and unit.
+        if num.ToString().Chars(1) = num.ToString().Chars(2) then
+            let tenUnit = numToTenWord (numAtPosition num 2 2)
+            if tenUnit = "" then
+                startUnit + " " + largestUnit // i.e. three hundred
+            else
+                startUnit + " " + largestUnit + " and " + tenUnit // i.e. three hundred and eleven
+        // If last two numbers not identical then fully dissect number down to unit.
         else
-            startUnit + " " + largestUnit
+            let tenUnit = numToTenWord ((numAtPosition num 2 1) * 10)
+            let unit = numToUnitWord (numAtPosition num 3 1)
+            let test = ref 0
+            if Int32.TryParse((numAtPosition num 2 2).ToString(), test) && tenUnit <> ""  then
+                startUnit + " " + largestUnit + " and " + tenUnit + " " + unit // i.e. one hundred and sixty five
+            else
+                 startUnit + " " + largestUnit // i.e. two hundred
 
+    /// Takes a number in the thousands and returns the word value.
     let thousandNumToWord (num:int) =
+        let startUnit = numToUnitWord (numAtPosition num 1 1)
         let largestUnit = numToLargestUnit num
         let mutable restOfThousandNum = ""
         if Int32.Parse(num.ToString().Substring(1,3)) <> 0 then
             restOfThousandNum <- hundredNumToWord (Int32.Parse(num.ToString().Substring(1,3)))
-        largestUnit + " " + restOfThousandNum
+        startUnit + " " + largestUnit + " " + restOfThousandNum // i.e. one thousand one hundred and sixty seven.
 
+    /// Takes a integer and assembles its word in English.
     let complexNumberToWord num =
         let mutable ans = ""
         if num.ToString().Length = 4 then
@@ -87,9 +116,9 @@ module Euler17 =
         elif num.ToString().Length = 3 then
             ans <- (hundredNumToWord num)
         elif num.ToString().Length = 2 then
-            ans <- (numToTenWord num)
+            ans <- (tenNumToWord num)
         elif num.ToString().Length = 1 then
             ans <- (numToUnitWord num)
         else
             printfn "No match"
-        ans
+        ans.Trim()
