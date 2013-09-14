@@ -1,5 +1,9 @@
 ﻿namespace Euler
+
 open System
+open System.Linq
+open System.Collections
+open System.Collections.Generic
 
 (*
     If the numbers 1 to 5 are written out in words: one, two, three, four, five,
@@ -75,15 +79,45 @@ module Euler17 =
         // check args are valid, if valid proceed with substring.
         if (num.ToString().Length >= position - length) && (position - 1 >= 0) then
             chars <- num.ToString().Substring(position - 1, length)
-        (res chars)
+        (res chars) // return active pattern based try parse for the int from string.
 
     let matchNumberToWord num =
-        // Break number down into constituent parts. (units, tens, hundreds, thousands)
-        let units = numAtPosition num (num.ToString().Length) 1 // the unit. of the number.
-        let tens = numAtPosition num (num.ToString().Length - 1) 1 // the ten unit of the number.
-        let hundreds = numAtPosition num (num.ToString().Length - 2) 2 // the hundred unit of the number.
-        let thousands = numAtPosition num (num.ToString().Length - 3) 3 // the thousand unit of the number.
-        ""
+        // Break number down into constituent parts. (unit, ten, hundred, thousand)
+        let unit = numAtPosition num (num.ToString().Length) 1 // the unit. of the number.
+        let directTen = numAtPosition num (num.ToString().Length - 1) 2 // exact number to word match for units of ten.
+        let ten = numAtPosition num (num.ToString().Length - 1) 1 // the ten unit of the number.
+        let hundred = numAtPosition num (num.ToString().Length - 2) 1 // the hundred unit of the number.
+        let thousand = numAtPosition num (num.ToString().Length - 3) 1 // the thousand unit of the number.
+        // Check if each option is Some, if so add get its word equiv. and add to string list.
+        let stringList = new List<string>()
+        if unit.IsSome then
+            let word = matchUnit unit.Value
+            stringList.Add(word)
+        if directTen.IsSome then
+            stringList.Clear()
+            let word = matchTen directTen.Value
+            stringList.Add(word)
+        elif ten.IsSome then
+            let word = matchTen ten.Value
+            stringList.Add(word)
+        if hundred.IsSome then
+            let word = (matchUnit hundred.Value) + " hundred "
+            stringList.Add(word)
+        if thousand.IsSome then
+            let word = (matchUnit thousand.Value) + " thousand "
+            stringList.Add(word)
+        // concatenate items in list.
+        let mutable word = ""
+        stringList.Reverse()
+        if stringList.Count > 1 then
+            for x in stringList do
+                if x.Contains("hundred") && x <> stringList.Last() then
+                    word <- word + " " + x + "and"
+                else
+                    word <- word + " " + x
+        else
+            word <- String.Join(" ", stringList)
+        word.Trim().Replace("  ", " ")
 
 //    /// Sum of all word numbers from 1..1000
 //    let sumAllCharsInNumberWordSequence start stop =
