@@ -122,3 +122,11 @@ module Euler17 =
         else
             printfn "No match"
         ans.Trim()
+
+    /// Sum of all word numbers from 1..1000
+    let sumAllCharsInNumberWordSequence start stop =
+        let mutable sumChars = 0I
+        for i = start to stop do
+            let currentWord = complexNumberToWord i
+            sumChars <- sumChars + bigint(currentWord.Length)
+        sumChars
