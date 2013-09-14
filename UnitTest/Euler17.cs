@@ -1,5 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 
 namespace UnitTest
 {
@@ -11,7 +10,7 @@ namespace UnitTest
         {
             const int testVar = 0;
             const string actual = "zero";
-            var calc = Euler.Euler17.complexNumberToWord(testVar);
+            var calc = Euler.Euler17.matchNumberToWord(testVar);
             Assert.AreEqual(actual, calc, ignoreCase: true);
         }
 
@@ -20,7 +19,7 @@ namespace UnitTest
         {
             const int testVar = 1;
             const string actual = "one";
-            var calc = Euler.Euler17.complexNumberToWord(testVar);
+            var calc = Euler.Euler17.matchNumberToWord(testVar);
             Assert.AreEqual(actual, calc, ignoreCase: true);
         }
 
@@ -29,7 +28,16 @@ namespace UnitTest
         {
             const int testVar = 11;
             const string actual = "eleven";
-            var calc = Euler.Euler17.complexNumberToWord(testVar);
+            var calc = Euler.Euler17.matchNumberToWord(testVar);
+            Assert.AreEqual(actual, calc, ignoreCase: true);
+        }
+
+        [TestMethod]
+        public void Euler17_87()
+        {
+            const int testVar = 87;
+            const string actual = "eighty seven";
+            var calc = Euler.Euler17.matchNumberToWord(testVar);
             Assert.AreEqual(actual, calc, ignoreCase: true);
         }
 
@@ -38,7 +46,7 @@ namespace UnitTest
         {
             const int testVar = 100;
             const string actual = "one hundred";
-            var calc = Euler.Euler17.complexNumberToWord(testVar);
+            var calc = Euler.Euler17.matchNumberToWord(testVar);
             Assert.AreEqual(actual, calc, ignoreCase: true);
         }
 
@@ -47,7 +55,7 @@ namespace UnitTest
         {
             const int testVar = 111;
             const string actual = "one hundred and eleven";
-            var calc = Euler.Euler17.complexNumberToWord(testVar);
+            var calc = Euler.Euler17.matchNumberToWord(testVar);
             Assert.AreEqual(actual, calc, ignoreCase: true);
         }
 
@@ -56,7 +64,7 @@ namespace UnitTest
         {
             const int testVar = 1000;
             const string actual = "one thousand";
-            var calc = Euler.Euler17.complexNumberToWord(testVar).Trim();
+            var calc = Euler.Euler17.matchNumberToWord(testVar);
             Assert.AreEqual(actual, calc, ignoreCase: true);
         }
 
@@ -65,7 +73,7 @@ namespace UnitTest
         {
             const int testVar = 1111;
             const string actual = "one thousand one hundred and eleven";
-            var calc = Euler.Euler17.complexNumberToWord(testVar);
+            var calc = Euler.Euler17.matchNumberToWord(testVar);
             Assert.AreEqual(actual, calc, ignoreCase: true);
         }
 
@@ -74,7 +82,7 @@ namespace UnitTest
         {
             const int testVar = 165;
             const string actual = "one hundred and sixty five";
-            var calc = Euler.Euler17.complexNumberToWord(testVar);
+            var calc = Euler.Euler17.matchNumberToWord(testVar);
             Assert.AreEqual(actual, calc, ignoreCase: true);
         }
 
@@ -83,7 +91,7 @@ namespace UnitTest
         {
             const int testVar = 1265;
             const string actual = "one thousand two hundred and sixty five";
-            var calc = Euler.Euler17.complexNumberToWord(testVar);
+            var calc = Euler.Euler17.matchNumberToWord(testVar);
             Assert.AreEqual(actual, calc, ignoreCase: true);
         }
     }

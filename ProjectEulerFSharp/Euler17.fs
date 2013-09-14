@@ -16,7 +16,7 @@ open System
 module Euler17 =
 
     /// Matches a single digit number to its word equivalent.
-    let numToUnitWord num =
+    let matchUnit num =
         match num with
             | x when x = 0  -> "zero"
             | x when x = 1  -> "one"
@@ -31,7 +31,7 @@ module Euler17 =
             | _ -> ""
 
     /// Matches a number in the tens to its word equivalent.
-    let numToTenWord num =
+    let matchTen num =
         match num with
             | x when x = 10 -> "ten"
             | x when x = 11 -> "eleven"
@@ -54,79 +54,41 @@ module Euler17 =
             | _ -> ""
 
     /// The largest unit the number consists of.
-    let numToLargestUnit num =
+    let matchMagnitide num =
         match num with
             | x when x.ToString().Length = 2 -> "ten"
             | x when x.ToString().Length = 3 -> "hundred"
             | x when x.ToString().Length = 4 -> "thousand"
             | _ -> ""
 
-    /// Gives a number by position and length from the input number.
+    // Active pattern to return null if parse fails.
+    // Some(int) returned if parse successful.
+    let res chars =
+        match Int32.TryParse chars with
+            | (true, result) -> Some result
+            | (false, _) -> None
+
+    /// Gives a number by position and length start with the input number.
     let numAtPosition (num:int) (position:int) (length:int) =
-        let chars = num.ToString().Substring(position - 1, length)
-        Int32.Parse(chars)
+        let mutable chars = ""
+        let parse = ref 0
+        // check args are valid, if valid proceed with substring.
+        if (num.ToString().Length >= position - length) && (position - 1 >= 0) then
+            chars <- num.ToString().Substring(position - 1, length)
+        (res chars)
 
-    /// Takes a number in the tens and returns its word value.
-    let tenNumToWord (num:int) =
-        let mutable unit = ""
-        if num.ToString().StartsWith("1") then
-            unit <- numToTenWord num
-            unit // i.e. five
-        else
-            unit <- numToUnitWord (numAtPosition num 1 1)
-            let tenUnit = numToTenWord ((numAtPosition num 2 1) * 10)
-            tenUnit + " " + unit // i.e. ninety five
+    let matchNumberToWord num =
+        // Break number down into constituent parts. (units, tens, hundreds, thousands)
+        let units = numAtPosition num (num.ToString().Length) 1 // the unit. of the number.
+        let tens = numAtPosition num (num.ToString().Length - 1) 1 // the ten unit of the number.
+        let hundreds = numAtPosition num (num.ToString().Length - 2) 2 // the hundred unit of the number.
+        let thousands = numAtPosition num (num.ToString().Length - 3) 3 // the thousand unit of the number.
+        ""
 
-    /// Takes a number in the hundreds and returns its word value.
-    let hundredNumToWord (num:int) =
-        let startUnit = numToUnitWord (numAtPosition num 1 1)
-        let largestUnit = numToLargestUnit num
-        // Last two numbers are identical then word will be present in ten unit active pattern
-        // so no need disect into ten and unit.
-        if num.ToString().Chars(1) = num.ToString().Chars(2) then
-            let tenUnit = numToTenWord (numAtPosition num 2 2)
-            if tenUnit = "" then
-                startUnit + " " + largestUnit // i.e. three hundred
-            else
-                startUnit + " " + largestUnit + " and " + tenUnit // i.e. three hundred and eleven
-        // If last two numbers not identical then fully dissect number down to unit.
-        else
-            let tenUnit = numToTenWord ((numAtPosition num 2 1) * 10)
-            let unit = numToUnitWord (numAtPosition num 3 1)
-            let test = ref 0
-            if Int32.TryParse((numAtPosition num 2 2).ToString(), test) && tenUnit <> ""  then
-                startUnit + " " + largestUnit + " and " + tenUnit + " " + unit // i.e. one hundred and sixty five
-            else
-                 startUnit + " " + largestUnit // i.e. two hundred
-
-    /// Takes a number in the thousands and returns the word value.
-    let thousandNumToWord (num:int) =
-        let startUnit = numToUnitWord (numAtPosition num 1 1)
-        let largestUnit = numToLargestUnit num
-        let mutable restOfThousandNum = ""
-        if Int32.Parse(num.ToString().Substring(1,3)) <> 0 then
-            restOfThousandNum <- hundredNumToWord (Int32.Parse(num.ToString().Substring(1,3)))
-        startUnit + " " + largestUnit + " " + restOfThousandNum // i.e. one thousand one hundred and sixty seven.
-
-    /// Takes a integer and assembles its word in English.
-    let complexNumberToWord num =
-        let mutable ans = ""
-        if num.ToString().Length = 4 then
-            ans <- (thousandNumToWord num)
-        elif num.ToString().Length = 3 then
-            ans <- (hundredNumToWord num)
-        elif num.ToString().Length = 2 then
-            ans <- (tenNumToWord num)
-        elif num.ToString().Length = 1 then
-            ans <- (numToUnitWord num)
-        else
-            printfn "No match"
-        ans.Trim()
-
-    /// Sum of all word numbers from 1..1000
-    let sumAllCharsInNumberWordSequence start stop =
-        let mutable sumChars = 0I
-        for i = start to stop do
-            let currentWord = complexNumberToWord i
-            sumChars <- sumChars + bigint(currentWord.Length)
-        sumChars
+//    /// Sum of all word numbers from 1..1000
+//    let sumAllCharsInNumberWordSequence start stop =
+//        let mutable sumChars = 0I
+//        for i = start to stop do
+//            let currentWord = complexNumberToWord i
+//            sumChars <- sumChars + bigint(currentWord.Length)
+//        sumChars
