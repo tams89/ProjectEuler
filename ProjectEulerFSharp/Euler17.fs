@@ -22,7 +22,7 @@ module Euler17 =
     /// Matches a single digit number to its word equivalent.
     let matchUnit num =
         match num with
-            | x when x = 0  -> "zero"
+            | x when x = 0  -> "naught"
             | x when x = 1  -> "one"
             | x when x = 2  -> "two"
             | x when x = 3  -> "three"
@@ -81,48 +81,50 @@ module Euler17 =
             chars <- num.ToString().Substring(position - 1, length)
         (res chars) // return active pattern based try parse for the int from string.
 
-    let matchNumberToWord num =
-        // Break number down into constituent parts. (unit, ten, hundred, thousand)
-        let unit = numAtPosition num (num.ToString().Length) 1 // the unit. of the number.
-        let directTen = numAtPosition num (num.ToString().Length - 1) 2 // exact number to word match for units of ten.
-        let ten = numAtPosition num (num.ToString().Length - 1) 1 // the ten unit of the number.
-        let hundred = numAtPosition num (num.ToString().Length - 2) 1 // the hundred unit of the number.
-        let thousand = numAtPosition num (num.ToString().Length - 3) 1 // the thousand unit of the number.
-        // Check if each option is Some, if so add get its word equiv. and add to string list.
-        let stringList = new List<string>()
-        if unit.IsSome then
-            let word = matchUnit unit.Value
-            stringList.Add(word)
-        if directTen.IsSome then
-            stringList.Clear()
-            let word = matchTen directTen.Value
-            stringList.Add(word)
-        elif ten.IsSome then
-            let word = matchTen ten.Value
-            stringList.Add(word)
-        if hundred.IsSome then
-            let word = (matchUnit hundred.Value) + " hundred "
-            stringList.Add(word)
-        if thousand.IsSome then
-            let word = (matchUnit thousand.Value) + " thousand "
-            stringList.Add(word)
-        // concatenate items in list.
-        let mutable word = ""
-        stringList.Reverse()
-        if stringList.Count > 1 then
-            for x in stringList do
-                if x.Contains("hundred") && x <> stringList.Last() then
-                    word <- word + " " + x + "and"
-                else
-                    word <- word + " " + x
-        else
-            word <- String.Join(" ", stringList)
-        word.Trim().Replace("  ", " ")
+    let wordForTenUnit num =
+        let mutable ans = ""
+        let tens = numAtPosition num 1 2
+        let exactMatch = matchTen tens.Value
+        let magnitude = matchMagnitide num
+        if tens.IsSome && magnitude.Contains("ten") && exactMatch <> "" then // direct match
+            ans <- matchTen tens.Value
+        elif tens.IsSome && magnitude.Contains("ten") && exactMatch = "" then // construct word
+            let first = matchTen ((numAtPosition num 1 1).Value * 10)
+            let last = matchUnit (numAtPosition num 2 1).Value
+            ans <- first + " " + last
+        ans
 
-//    /// Sum of all word numbers from 1..1000
-//    let sumAllCharsInNumberWordSequence start stop =
-//        let mutable sumChars = 0I
-//        for i = start to stop do
-//            let currentWord = complexNumberToWord i
-//            sumChars <- sumChars + bigint(currentWord.Length)
-//        sumChars
+    let matchNumberToWord num =
+        let mutable ans = ""
+        if num.ToString().Length = 1 then
+            ans <- matchUnit num
+        else
+            let strList = new List<string>()
+            let firstWord = matchUnit (numAtPosition num 1 1).Value // should be a single digit int.
+            let magnitude = matchMagnitide num
+            if magnitude.Contains("ten") then
+                ans <- wordForTenUnit num
+            elif magnitude.Contains("hundred") then
+                if num.ToString().Contains("00") then
+                    ans <-  firstWord + " hundred"
+                elif (numAtPosition num 2 1).Value = 0 then
+                    ans <- firstWord + " " + magnitude + " and " + matchUnit (numAtPosition num 3 1).Value
+                else
+                    ans <- firstWord + " " + magnitude + " and " + wordForTenUnit (numAtPosition num 2 2).Value
+            elif magnitude.Contains("thousand") then
+                if num.ToString().Contains("000") then
+                    ans <- firstWord + " thousand"
+                elif (numAtPosition num 3 1).Value = 0 then
+                    ans <- firstWord + " " + magnitude + " and " + matchUnit (numAtPosition num 4 1).Value
+                else
+                    let hundred = matchUnit (numAtPosition num 2 1).Value
+                    ans <- firstWord + " " + magnitude + " and " + hundred + " hundred and " + wordForTenUnit (numAtPosition num 3 2).Value
+        ans // return
+
+    /// Sum of all word numbers from 1..1000
+    let sumAllCharsInNumberWordSequence start stop =
+        let mutable sumChars = 0
+        for i = start to stop do
+            let currentWord = (matchNumberToWord i).Replace(" ", "")
+            sumChars <- sumChars + currentWord.Length
+        sumChars
