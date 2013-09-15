@@ -22,7 +22,7 @@ module Euler17 =
     /// Matches a single digit number to its word equivalent.
     let matchUnit num =
         match num with
-            | x when x = 0  -> "naught"
+            | x when x = 0  -> "zero"
             | x when x = 1  -> "one"
             | x when x = 2  -> "two"
             | x when x = 3  -> "three"
@@ -49,7 +49,7 @@ module Euler17 =
             | x when x = 19 -> "nineteen"
             | x when x = 20 -> "twenty"
             | x when x = 30 -> "thirty"
-            | x when x = 40 -> "fourty"
+            | x when x = 40 -> "forty"
             | x when x = 50 -> "fifty"
             | x when x = 60 -> "sixty"
             | x when x = 70 -> "seventy"
@@ -118,7 +118,7 @@ module Euler17 =
                     ans <- firstWord + " " + magnitude + " and " + matchUnit (numAtPosition num 4 1).Value
                 else
                     let hundred = matchUnit (numAtPosition num 2 1).Value
-                    ans <- firstWord + " " + magnitude + " and " + hundred + " hundred and " + wordForTenUnit (numAtPosition num 3 2).Value
+                    ans <- firstWord + " " + magnitude + " " + hundred + " hundred and " + wordForTenUnit (numAtPosition num 3 2).Value
         ans // return
 
     /// Sum of all word numbers from 1..1000

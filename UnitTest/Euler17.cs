@@ -184,5 +184,14 @@ namespace UnitTest
             var calc = Euler.Euler17.matchNumberToWord(testVar);
             Assert.AreEqual(actual, calc, ignoreCase: true);
         }
+
+        [TestMethod]
+        public void Euler17_222()
+        {
+            const int testVar = 222;
+            const string actual = "two hundred and twenty two";
+            var calc = Euler.Euler17.matchNumberToWord(testVar);
+            Assert.AreEqual(actual, calc, ignoreCase: true);
+        }
     }
 }
