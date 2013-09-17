@@ -3,5 +3,5 @@
         [<EntryPoint>]
         let main args =
 //            printfn "ans %A" (Euler17.matchNumberToWord 201)
-            printfn "ans %A" (Euler17.sumAllCharsInNumberWordSequence 1 1000)
+            printfn "ans %A" (Euler18.pathFinder)
             0 // return an integer exit code
