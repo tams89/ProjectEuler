@@ -20,22 +20,22 @@ open System.Linq
 
 module Euler18 =
 
-    let BigTriangle =
-        [| [| 75; |];
-           [| 95; 64; |];
-           [| 17; 47; 82; |];
-           [| 18; 35; 87; 10; |];
-           [| 20; 04; 82; 47; 65; |];
-           [| 19; 01; 23; 75; 03; 34; |];
-           [| 88; 02; 77; 73; 07; 63; 67; |];
-           [| 99; 65; 04; 28; 06; 16; 70; 92; |];
-           [| 41; 41; 26; 56; 83; 40; 80; 70; 33; |];
-           [| 41; 48; 72; 33; 47; 32; 37; 16; 94; 29; |];
-           [| 53; 71; 44; 65; 25; 43; 91; 52; 97; 51; 14; |];
-           [| 70; 11; 33; 28; 77; 73; 17; 78; 39; 68; 17; 57; |];
-           [| 91; 71; 52; 38; 17; 14; 91; 43; 58; 50; 27; 29; 48; |];
-           [| 63; 66; 04; 68; 89; 53; 67; 30; 73; 16; 69; 87; 40; 31; |];
-           [| 04; 62; 98; 27; 23; 09; 70; 98; 73; 93; 38; 53; 60; 04; 23; |] |]
+//    let triangle =
+//        [| [| 75; |];
+//           [| 95; 64; |];
+//           [| 17; 47; 82; |];
+//           [| 18; 35; 87; 10; |];
+//           [| 20; 04; 82; 47; 65; |];
+//           [| 19; 01; 23; 75; 03; 34; |];
+//           [| 88; 02; 77; 73; 07; 63; 67; |];
+//           [| 99; 65; 04; 28; 06; 16; 70; 92; |];
+//           [| 41; 41; 26; 56; 83; 40; 80; 70; 33; |];
+//           [| 41; 48; 72; 33; 47; 32; 37; 16; 94; 29; |];
+//           [| 53; 71; 44; 65; 25; 43; 91; 52; 97; 51; 14; |];
+//           [| 70; 11; 33; 28; 77; 73; 17; 78; 39; 68; 17; 57; |];
+//           [| 91; 71; 52; 38; 17; 14; 91; 43; 58; 50; 27; 29; 48; |];
+//           [| 63; 66; 04; 68; 89; 53; 67; 30; 73; 16; 69; 87; 40; 31; |];
+//           [| 04; 62; 98; 27; 23; 09; 70; 98; 73; 93; 38; 53; 60; 04; 23; |] |]
 
     // Down & diagonally right so adjacent elements going down.
     let triangle =
@@ -46,34 +46,52 @@ module Euler18 =
 
     let pathFinder =
         
-        // Estimate the largest value possible; note this does not restrict to adjacent items.
-        let largestSumGuestimatation : int = seq { for i in triangle do yield i.Max() } |> Seq.sum
+        // Start with bottom row, add it to the row above and select the top x values
+        // where x is the number of values in the row above.
+        let summedRow = new List<List<int>>()
+        let numRowsInTriangle = triangle.GetUpperBound(0)
         
-        let mutable baseReached = false
-        let rowTotals = new List<List<int>>()
-        rowTotals.Add(triangle.[0].ToList())
-        let mutable currentRow = 0
-        while not(baseReached) do
-            let intList = new List<int>() 
-            let currentSummedRow = rowTotals.Last()
-            // for each value in row get element down and down-right and sum then return in seq.
-            let mutable currentCol = 0
-            for x in currentSummedRow do 
-                let downVal = triangle.[currentRow + 1].[currentCol]
-                let mutable adjacentDown = 0
-                if currentCol < triangle.Last().Length - 1 then
-                    adjacentDown <- triangle.[currentRow + 1].[currentCol + 1]
-                let sumWithDown = x + downVal
-                let sumWithAdjacentDown = x + adjacentDown
-                intList.Add(sumWithDown)
-                intList.Add(sumWithAdjacentDown)
-                currentCol <- currentCol + 1
-            rowTotals.Add(intList)
+        for i = triangle.GetUpperBound(0) downto triangle.GetLowerBound(0) + 1 do
+         let rowAbove = triangle.[i - 1]
+         let baseArray = triangle.[i]
+         let sumList = new List<int>()
 
-            if currentRow < triangle.GetLength(0) - 2 then
-                 currentRow <- currentRow + 1
-                 currentCol <- 0
-            else
-                baseReached <- true
+         // Bottom row initially equals triangles base. 
+         // Then becomes the most recently summed row in summedRows.
+         let bottomRow = 
+            match i with
+               | i when i = triangle.GetUpperBound(0) -> triangle.[i].ToList()
+               | _ -> summedRow.Last()
+         
+         for x = 0 to baseArray.GetUpperBound(0) do 
+           
+           // Add each value in row below to:
+           // 1. the value directly above
+           // 2. the value diagonally to the left and up.
+           
+           let mutable valueAbove = 0
+           try 
+            valueAbove <- triangle.[i - 1].[x]
+           with 
+             | :? System.Exception -> printfn "Error no value above"
+           
+           let mutable valueUpAndLeft = 0
+           try
+               valueUpAndLeft <- triangle.[i - 1].[x - 1]
+           with 
+               | :? System.Exception -> printfn "Error no value to above and to the left"
+
+           // Add the found values.
+           let sumWithAbove = bottomRow.[x] + valueAbove
+           let sumWithAboveAndLeft = bottomRow.[x] + valueUpAndLeft
+
+           // Add sums to list.
+           sumList.Add(sumWithAboveAndLeft)
+           sumList.Add(sumWithAbove)
+
+         // Select max x element from sumList where x is the number of elements in the row above.
+         let filterValue = sumList.OrderByDescending(fun i -> i).ToList().[rowAbove.Length]
+         let filterForMaxX = sumList.Where(fun x -> x > filterValue).ToList()
+         summedRow.Add(filterForMaxX)
         
-        rowTotals.Last().Max() // max value from last array
+        summedRow.Last().Max() // max value from last array
