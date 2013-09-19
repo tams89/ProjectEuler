@@ -37,29 +37,6 @@ module Euler18 =
            [| 63; 66; 04; 68; 89; 53; 67; 30; 73; 16; 69; 87; 40; 31; |];
            [| 04; 62; 98; 27; 23; 09; 70; 98; 73; 93; 38; 53; 60; 04; 23; |] |]
 
-//    let AddBottomRowToRowAbove = 
-//        let listOfRowOfSums = new List<List<int>>()
-//        let mutable rowPosition = triangle.GetUpperBound(0) 
-//        while rowPosition > 0 do
-//            let rowOfSums = new List<int>()
-//            for columnPosition = 0 to triangle.[rowPosition - 1].GetUpperBound(0) do
-//                let valueToSumWith = triangle.[rowPosition - 1].[columnPosition]
-//                let sumWithBelow = 
-//                    if listOfRowOfSums.Count > 0 then
-//                        valueToSumWith + listOfRowOfSums.Last().[columnPosition]
-//                    else
-//                        valueToSumWith + triangle.[rowPosition].[columnPosition]
-//                let sumWithBelowAndRight = 
-//                    if listOfRowOfSums.Count > 0 then
-//                        valueToSumWith + listOfRowOfSums.Last().[columnPosition + 1]
-//                    else 
-//                        valueToSumWith + triangle.[rowPosition].[columnPosition + 1]
-//                let max = [ sumWithBelow; sumWithBelowAndRight ] |> List.max
-//                rowOfSums.Add(max)
-//            listOfRowOfSums.Add(rowOfSums)
-//            rowPosition <- rowPosition - 1 
-//        listOfRowOfSums
-
     let AddBottomRowToRowAbove = 
         let listOfRowOfSums = new List<List<int>>()
         let mutable rowPosition = triangle.GetUpperBound(0) 
