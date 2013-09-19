@@ -41,6 +41,7 @@ module Euler18 =
 //        let listOfRowOfSums = new List<List<int>>()
 //        let mutable rowPosition = triangle.GetUpperBound(0) 
 //        while rowPosition > 0 do
+//            let rowOfSums = new List<int>()
 //            for columnPosition = 0 to triangle.[rowPosition - 1].GetUpperBound(0) do
 //                let valueToSumWith = triangle.[rowPosition - 1].[columnPosition]
 //                let sumWithBelow = 
@@ -63,6 +64,7 @@ module Euler18 =
         let listOfRowOfSums = new List<List<int>>()
         let mutable rowPosition = triangle.GetUpperBound(0) 
         while rowPosition > 0 do
+            let rowOfSums = new List<int>()
             for columnPosition = 0 to triangle.[rowPosition - 1].GetUpperBound(0) do
                 let valueToSumWith = triangle.[rowPosition - 1].[columnPosition]
                 let sumWithBelow = 
