@@ -2,6 +2,5 @@
     module Main =
         [<EntryPoint>]
         let main args =
-//            printfn "ans %A" (Euler17.matchNumberToWord 201)
-            printfn "ans %A" (Euler18.AddBottomRowToRowAbove)
-            0 // return an integer exit code
+            printfn "ans %A" (Euler67.triangle)
+            0

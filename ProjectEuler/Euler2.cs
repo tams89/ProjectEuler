@@ -23,7 +23,6 @@ namespace ProjectEuler
 
                 Console.WriteLine("Fib " + fn[i]);
 
-
                 if (fn[i] % 2 == 0)
                     fneven.Add(fn[i]);
                 Console.WriteLine(fneven.Sum());
