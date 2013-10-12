@@ -2,5 +2,5 @@
     module Main =
         [<EntryPoint>]
         let main args =
-            printfn "ans %A" (Euler21.iterator 10000)
+            printfn "ans %A" (Euler26.answer)
             0

@@ -62,14 +62,18 @@
     <Compile Include="Euler16.fs" />
     <Compile Include="Euler17.fs" />
     <Compile Include="Euler18.fs" />
+    <Compile Include="Euler19.fs" />
     <Compile Include="Euler20.fs" />
     <Compile Include="Euler21.fs" />
+    <Compile Include="Euler22.fs" />
     <Compile Include="Euler25.fs" />
+    <Compile Include="Euler26.fs" />
     <Compile Include="Euler67.fs" />
     <Compile Include="Program.fs" />
     <Content Include="Euler13.txt" />
     <None Include="packages.config" />
     <Content Include="triangle.txt" />
+    <Content Include="names.txt" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="FSharp.PowerPack">

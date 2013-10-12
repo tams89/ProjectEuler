@@ -51,7 +51,9 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Euler17.cs" />
+    <Compile Include="Euler19.cs" />
     <Compile Include="Euler21.cs" />
+    <Compile Include="Euler22.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
