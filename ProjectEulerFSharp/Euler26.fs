@@ -1,5 +1,9 @@
 ﻿namespace Euler
 
+open System
+open System.Threading
+open System.Threading.Tasks
+
 (*
     A unit fraction contains 1 in the numerator. The decimal representation of the unit fractions with denominators 2 to 10 are given:
 
@@ -19,14 +23,29 @@
 
 module Euler26 =
 
-    let repeatFinder decimal =
-        let decString = decimal.ToString().TrimStart('.') // trim decimal point and before.
-        let startValue = decString.[2] // first number after decimal point.
-        let repeatSection = decString.Split(startValue).[0].Length
-        repeatSection
+//    let rec longDivision num div rem fraction:list<int> =
+//        // Divide 1 by divisor if rem is less than 1 then
+//        // multiply num by 10 and repeat -> get the remainder if this calc (int)
+//        // and multiply by 10 and repeat again.
+//        let divide = num % div
+
+    let repeatFinder (decimal:int) =
+//        let decString = (1M % System.Decimal(decimal)).ToString()
+        let rem = ref 0
+        let decString = System.Math.DivRem(1, decimal, rem).ToString()
+        let firstDecVal = decString.IndexOf('.') + 1
+        let startValue = decString.[firstDecVal] // first number after decimal point.
+        let nextOccurenceOfStartValue = [ for i = firstDecVal to decString.Length - 1 do if decString.[i].Equals(startValue) then yield i ]
+        if nextOccurenceOfStartValue.Length > 1 then
+            let repeatUnit = nextOccurenceOfStartValue.[1] - nextOccurenceOfStartValue.[0]
+            if repeatUnit > 1 then
+                (repeatUnit, decimal)
+            else
+                (0,0)
+        else
+            (0,0)
 
     let answer =
-        let repeatedSectionList = [ for i = 1 to 1000 - 1 do yield repeatFinder 1/i ]
-        let largestRepeatedSection = repeatedSectionList |> List.max
-        printfn "largest repeated section: %A" largestRepeatedSection
-        largestRepeatedSection
+        let ans = [ for i = 1 to 1000 - 1 do yield repeatFinder i ] |> List.max
+        printfn "%A" ans
+        ans
