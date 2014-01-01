@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+<assembly><name>ProjectEulerFSharp</name></assembly>
+<members>
+<member name="">
+
+</member>
+<member name="T:Euler.Euler12">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="T:Euler.Euler13">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="T:Euler.Euler14">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="T:Euler.Euler15">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="T:Euler.Euler16">
+
+</member>
+<member name="M:Euler.Euler17.sumAllCharsInNumberWordSequence(System.Int32,System.Int32)">
+<summary>
+ Sum of all word numbers from 1..1000
+</summary>
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="M:Euler.Euler17.numAtPosition(System.Int32,System.Int32,System.Int32)">
+<summary>
+ Gives a number by position and length start with the input number.
+</summary>
+</member>
+<member name="">
+
+</member>
+<member name="M:Euler.Euler17.matchMagnitide``1(``0)">
+<summary>
+ The largest unit the number consists of.
+</summary>
+</member>
+<member name="M:Euler.Euler17.matchTen(System.Int32)">
+<summary>
+ Matches a number in the tens to its word equivalent.
+</summary>
+</member>
+<member name="M:Euler.Euler17.matchUnit(System.Int32)">
+<summary>
+ Matches a single digit number to its word equivalent.
+</summary>
+</member>
+<member name="T:Euler.Euler17">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="T:Euler.Euler18">
+
+</member>
+<member name="M:Euler.Euler19.answer(System.Int32,System.Int32)">
+<summary>
+ Collection of the days in a particular month.
+</summary>
+</member>
+<member name="T:Euler.Euler19">
+
+</member>
+<member name="">
+
+</member>
+<member name="T:Euler.Euler20">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="T:Euler.Euler21">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="T:Euler.Euler22">
+
+</member>
+<member name="">
+
+</member>
+<member name="T:Euler.Euler23">
+
+</member>
+<member name="">
+
+</member>
+<member name="T:Euler.Euler24">
+
+</member>
+<member name="">
+
+</member>
+<member name="T:Euler.Euler25">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="T:Euler.Euler26">
+
+</member>
+<member name="">
+
+</member>
+<member name="T:Euler.Euler67">
+
+</member>
+<member name="">
+
+</member>
+<member name="T:Euler.Main">
+
+</member>
+</members>
+</doc>

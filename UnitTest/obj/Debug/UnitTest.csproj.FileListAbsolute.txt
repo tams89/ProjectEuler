@@ -1,0 +1,10 @@
+C:\Users\Tamesh\Documents\Visual Studio 2012\Projects\ProjectEuler\UnitTest\bin\Debug\UnitTest.dll
+C:\Users\Tamesh\Documents\Visual Studio 2012\Projects\ProjectEuler\UnitTest\bin\Debug\UnitTest.pdb
+C:\Users\Tamesh\Documents\Visual Studio 2012\Projects\ProjectEuler\UnitTest\bin\Debug\ProjectEuler.exe
+C:\Users\Tamesh\Documents\Visual Studio 2012\Projects\ProjectEuler\UnitTest\bin\Debug\ProjectEulerFSharp.exe
+C:\Users\Tamesh\Documents\Visual Studio 2012\Projects\ProjectEuler\UnitTest\bin\Debug\ProjectEulerFSharp.pdb
+C:\Users\Tamesh\Documents\Visual Studio 2012\Projects\ProjectEuler\UnitTest\bin\Debug\ProjectEulerFSharp.xml
+C:\Users\Tamesh\Documents\Visual Studio 2012\Projects\ProjectEuler\UnitTest\bin\Debug\ProjectEuler.pdb
+C:\Users\Tamesh\Documents\Visual Studio 2012\Projects\ProjectEuler\UnitTest\obj\Debug\UnitTest.csprojResolveAssemblyReference.cache
+C:\Users\Tamesh\Documents\Visual Studio 2012\Projects\ProjectEuler\UnitTest\obj\Debug\UnitTest.dll
+C:\Users\Tamesh\Documents\Visual Studio 2012\Projects\ProjectEuler\UnitTest\obj\Debug\UnitTest.pdb

@@ -1,0 +1,6 @@
+C:\Users\Tam\Documents\Visual Studio 2013\Projects\ProjectEuler\ProjectEuler\bin\Release\ProjectEuler.exe.config
+C:\Users\Tam\Documents\Visual Studio 2013\Projects\ProjectEuler\ProjectEuler\bin\Release\ProjectEuler.exe
+C:\Users\Tam\Documents\Visual Studio 2013\Projects\ProjectEuler\ProjectEuler\bin\Release\ProjectEuler.pdb
+C:\Users\Tam\Documents\Visual Studio 2013\Projects\ProjectEuler\ProjectEuler\obj\Release\ProjectEuler.exe
+C:\Users\Tam\Documents\Visual Studio 2013\Projects\ProjectEuler\ProjectEuler\obj\Release\ProjectEuler.pdb
+C:\Users\Tam\Documents\Visual Studio 2013\Projects\ProjectEuler\ProjectEuler\obj\Release\ProjectEuler.csprojResolveAssemblyReference.cache

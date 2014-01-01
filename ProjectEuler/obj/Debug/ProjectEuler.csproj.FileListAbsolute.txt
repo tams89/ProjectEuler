@@ -13,9 +13,3 @@ D:\ProjectEuler\ProjectEuler\obj\Debug\ProjectEuler.csprojResolveAssemblyReferen
 D:\ProjectEuler\ProjectEuler\bin\Debug\ProjectEuler.exe
 D:\ProjectEuler\ProjectEuler\bin\Debug\ProjectEuler.pdb
 D:\ProjectEuler\ProjectEuler\obj\Debug\ProjectEuler.pdb
-C:\Users\Tam\Documents\Visual Studio 2013\Projects\ProjectEuler\ProjectEuler\bin\Debug\ProjectEuler.exe.config
-C:\Users\Tam\Documents\Visual Studio 2013\Projects\ProjectEuler\ProjectEuler\bin\Debug\ProjectEuler.exe
-C:\Users\Tam\Documents\Visual Studio 2013\Projects\ProjectEuler\ProjectEuler\bin\Debug\ProjectEuler.pdb
-C:\Users\Tam\Documents\Visual Studio 2013\Projects\ProjectEuler\ProjectEuler\obj\Debug\ProjectEuler.exe
-C:\Users\Tam\Documents\Visual Studio 2013\Projects\ProjectEuler\ProjectEuler\obj\Debug\ProjectEuler.pdb
-C:\Users\Tam\Documents\Visual Studio 2013\Projects\ProjectEuler\ProjectEuler\obj\Debug\ProjectEuler.csprojResolveAssemblyReference.cache
