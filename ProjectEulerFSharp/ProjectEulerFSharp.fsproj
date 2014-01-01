@@ -66,9 +66,11 @@
     <Compile Include="Euler20.fs" />
     <Compile Include="Euler21.fs" />
     <Compile Include="Euler22.fs" />
+    <Compile Include="Euler23.fs" />
     <Compile Include="Euler24.fs" />
     <Compile Include="Euler25.fs" />
-    <Compile Include="Euler26.fs" />
+    <Compile Include="Euler27.fs" />
+    <Compile Include="Euler28.fs" />
     <Compile Include="Euler67.fs" />
     <Compile Include="Program.fs" />
     <Content Include="Euler13.txt" />
