@@ -32,13 +32,4 @@ module Euler28 =
     Grid.[501,501] <- 1 // starting element
 
     for i = 0 to 1001 - 1 do Grid.[0,i] <- 1 + i // top row
-    for i = 1001 - 1 downto 0 do Grid.[i,0] <- 1 + i // left column
-    for i = 1001 - 1 downto 0 do Grid.[1000,i] <- 1 + i // bottom row
-    for i = 1001 - 2 downto 0 do Grid.[i,1000] <- 1 + i // right column
-    printfn "Top left: %A, Top Right: %A, Bottom Left: %A, Bottom Right: %A" Grid.[0,0] Grid.[1000,0] Grid.[0,1000] Grid.[1000,1000]
-
-    let mutable ringDepth = 1 // starts at 1 as shell 0 already populated.
-    let mutable previousElement = (501,501)
-    for x = 0 to 1001 do // all shells
-        for i = 0 to 2**ringDepth do
-            
+    for i = 1001 - 2 downto 0 do Grid.[i,0] <- 1 + i // left column
