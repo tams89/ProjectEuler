@@ -24,5 +24,5 @@ module Euler29 =
  
  let answer = 
     let boundary = [ 2.0..100.0 ]
-    let combinations = seq { for x in boundary do for i in boundary do yield x**i } |> Seq.distinct
+    let combinations = seq { for x in boundary do for i in boundary do yield x**i } |> Seq.distinct // sort unrequired
     printfn "number of distinct values: %A" (combinations |> Seq.length)
