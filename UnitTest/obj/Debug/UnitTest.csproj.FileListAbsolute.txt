@@ -8,3 +8,4 @@ C:\Users\Tamesh\Documents\Visual Studio 2012\Projects\ProjectEuler\UnitTest\bin\
 C:\Users\Tamesh\Documents\Visual Studio 2012\Projects\ProjectEuler\UnitTest\obj\Debug\UnitTest.csprojResolveAssemblyReference.cache
 C:\Users\Tamesh\Documents\Visual Studio 2012\Projects\ProjectEuler\UnitTest\obj\Debug\UnitTest.dll
 C:\Users\Tamesh\Documents\Visual Studio 2012\Projects\ProjectEuler\UnitTest\obj\Debug\UnitTest.pdb
+C:\Users\Tam\Documents\Visual Studio 2013\Projects\ProjectEuler\UnitTest\obj\Debug\UnitTest.csprojResolveAssemblyReference.cache
